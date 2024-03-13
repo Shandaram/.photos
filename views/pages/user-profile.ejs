@@ -1,0 +1,42 @@
+<div class="user cont">
+  <img
+    class="profile_pic"
+    src="data:image/png; base64, <%= user.profile_pic %>"
+    alt=""
+  />
+  <div>
+    <div class="horizontal-flex">
+        <h1><%= user.user_name %></h1>
+        <a href="/users/<%= user.user_id %>/edit">Edit</a>
+    </div>
+
+
+    <div class="horizontal-grid-3">
+      <div>
+        <p>Posts:</p>
+        <p>0</p>
+      </div>
+      <div>
+        <p>Followers:</p>
+        <p>0</p>
+      </div>
+      <div>
+        <p>Following:</p>
+        <p>0</p>
+      </div>
+    </div>
+    <div class="horizontal-flex">
+      <div><%= user.user_fullName %> </div>
+      <div>  he/his</div>
+    </div>
+
+    <div><%= user.user_age %> yo</div>
+
+    <div>
+      <p>Bio</p>
+      <p><%= user.user_bio %></p>
+    </div>
+  </div>
+</div>
+
+<div style="background-color: black; width: 100%; height: 1px;"></div>

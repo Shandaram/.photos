@@ -1,0 +1,25 @@
+  <div>
+    <h1>Share your perspective</h1>
+    <p>
+      Make sure to adjust the href attribute to match the path to your CSS file
+      relative to your HTML file. This method allows you to keep your HTML and
+      CSS separate, which is a good practice for organizing your code.
+    </p>
+
+    <form action="/users/login" method="post">
+      <label for="email">Email</label>
+      <input id="email" type="text" name="email" required />
+      <label for="password">Password</label>
+      <input type="text" name="password" required />
+      <% if (message) { %>
+        <div class="" >
+          <%= message %>
+        </div>
+      <% } %>
+      
+      <button>Log in</button>
+    </form>
+
+    <p>If you do not have an acccount, <a href="/register"> sign up</a> and join the fun.</p>
+  
+  </div>

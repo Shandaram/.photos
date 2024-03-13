@@ -1,0 +1,32 @@
+
+<p>
+ Enter your details.
+</p>
+
+<% const fields = [
+{ label: "Username", variable: "user_name" },
+{ label: "Email", variable: "email" }
+]  %>
+
+<% fields.forEach(field => { %>
+<label for="<%= field.variable %>"><%= field.label %>: </label>
+<span><%= user[field.variable] %></span>
+<br>
+<% })  %>
+
+
+
+<form action="/users/<%=user.user_id %>/edit"  method="post" enctype="multipart/form-data">
+<label for="user_fullName">Name</label>
+<input type="text" name="user_fullName" id="user_fullName" value="<%= user.user_fullName || '' %>" />
+<label for="user_age">Age</label>
+<input type="text" name="user_age"  id="user_age" value="<%= user.user_age || '' %>" />
+<label for="user_bio">Bio</label>
+<input type="text" name="user_bio" id="user_bio" value="<%= user.user_bio || '' %>" />
+<label for="profile_pic">Profile Picture</label>
+<input type="file" name="profile_pic" id="profile_pic" accept="image/jpeg, image/png" />
+<button>Save</button>
+</form>    
+<form action= "/users/<%= user.user_id %>" method="get">
+<input type="submit" value="to user" />
+</form>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+
+  <body>
+  
+    <%- include(`../partials/header-front`)  %>
+
+    <div class="main_cont">
+  
+      <div class="login cont">
+        <div>
+          <img
+            src="https://figmaelements.com/wp-content/uploads/2020/12/device-mockups.png"
+            alt=""
+          />
+        </div>
+     
+      <%- include(`../auth/${page}`)  %>
+      </div>
+  
+   
+  
+    </div>
+  </body>
+</html>

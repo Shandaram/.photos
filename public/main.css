@@ -1,0 +1,91 @@
+body, form {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;  
+    margin:0;
+}
+
+
+.main_cont {
+  display: flex;
+  margin: 20vh 10vw;
+  flex-direction:column;
+  justify-content: center;  
+  align-items: center;
+
+}
+
+img {
+    width: 100%;
+}
+
+header {
+  background-color: white;
+  position:fixed;
+z-index: 1;
+top:0;
+  border-bottom: 1px rgb(198, 198, 198) solid;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  /* justify-content: center; */
+  width: 100%;
+  text-align: center;
+  
+
+}
+
+.butt {
+  text-align: right;
+}
+
+header div {
+  padding: 1vh 4vh;
+}
+
+a {
+  margin: 0;
+}
+
+.profile_pic {
+  width: 12vw; 
+  height: 12vw; 
+  border-radius: 50%; /* Make the border-radius half of the width and height to create a circle */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.login.cont {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto;
+  justify-items: center; 
+  align-items: center; 
+}
+
+.login.cont img {
+  width:100%;
+  justify-self: right; 
+}
+
+.user.cont {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  justify-items: center; 
+  align-items: center; 
+}
+
+.horizontal-flex {
+  display: flex;
+  flex-direction: row;
+  /* justify-items: left; 
+  align-items: left;  */
+}
+
+.horizontal-grid-3 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto;
+  align-items: center; 
+}
