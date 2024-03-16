@@ -1,5 +1,5 @@
 import express from "express" 
-import { getUsers, createUser } from "../config/database.js" 
+import { getUsers, createUser } from "../config/user.js" 
 import multer from "multer" 
 import { genPassword } from "../utils/passwordUtils.js"
 

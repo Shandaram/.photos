@@ -1,0 +1,36 @@
+<div id="modal-body">
+  <div class="modal-content">
+    <img src="<%= post.path.slice(6) %>" alt="Post Image">
+    <div>
+      <p><%= post.description %></p>
+      <p>likes: <%= post.likes %></p>
+     <a href="/users/<%= post.user_id %>"><butto>close</button></a> 
+    </div>
+  </div>
+</div>
+
+<style>
+  #modal-body {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  .modal-content {
+    width: 70%;
+    height: 90%;
+    display: grid;
+    grid-template-columns: 3fr 1.5fr;
+    background-color: white;
+  }
+
+  .modal-content img {
+    width: 100%;
+    
+  }
+</style>

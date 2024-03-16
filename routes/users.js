@@ -1,12 +1,14 @@
 import express from "express";
 import session from "express-session";
-import { getUsers, getUser, updateUser } from "../config/database.js";
+import { getUsers, getUser, updateUser } from "../config/user.js";
+import { getPosts } from "../config/posts.js";
 import multer from "multer";
 import passport from "passport";
 import  { strategy }  from '../config/passport.js';
 import Sequelize from "sequelize";
 import connectSessionSequelize from 'connect-session-sequelize';
-
+import dotenv from "dotenv";
+dotenv.config();
 
 const users = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -29,7 +31,7 @@ var myStore = new SequelizeStore({
 
 users.use(
   session({
-    secret: "keyboard cat",
+    secret: process.env.SESSION_SECRET,
     store: myStore,
     saveUninitialized: false,
     resave: false,
@@ -71,9 +73,11 @@ users.get("/users/:id", async (req, res) => {
     } else {
       req.session.viewCount = 1;
     }
+    const posts = await getPosts();
     res.render("./layouts/profileUser.ejs", {
       user,
       page: "user-profile",
+      posts
     });
   }
 });
@@ -123,6 +127,7 @@ users.post(
     const user = await getUser(id);
     const user_fullName = req.body.user_fullName;
     const user_age = req.body.user_age;
+    const pronouns = req.body.pronouns;
     const user_bio = req.body.user_bio;
     if (req.file) {
       profile_pic = req.file.buffer.toString("base64");
@@ -134,6 +139,7 @@ users.post(
       user_age,
       user_bio,
       profile_pic,
+      pronouns
     });
     res.redirect(`/users/${user.user_id}`);
   }
