@@ -1,0 +1,22 @@
+<div class="create">
+    <p>Make sure to adjust the href attribute to match the path to your CSS</p>
+    <form action="/posts" method="post" enctype="multipart/form-data" >
+
+      <label for="description">Description</label>
+      <input type="text" name="description" id="description" />
+      <label for="description">Alt text</label>
+      <input type="text" name="alt_text" id="alt_text" />
+      <label for="path">Post Picture</label>
+      <input
+        type="file"
+        name="path"
+        id="path"
+        accept="image/jpeg, image/png"
+      />
+      <div>
+        <button type="submit" class="cta-button">post</button>
+        <a href="/users/<%= user.user_id %>" class="sec-button">back</a>
+      </div>
+
+    </form>
+  </div>

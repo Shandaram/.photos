@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/colors.css" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/579021082b.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
-  <body>
-  
-    <%- include(`../partials/header-front`)  %>
-
-    <div class="main_cont">
-  
-      <div class="login cont">
-        <div>
-          <img
-            src="https://figmaelements.com/wp-content/uploads/2020/12/device-mockups.png"
-            alt=""
-          />
-        </div>
-     
-      <%- include(`../auth/${page}`)  %>
-      </div>
-  
-   
-  
+  <body class="front-b">
+    <!-- <h1 class="back">
+      <% for( let index = 0; index < 2; index++ ) { %>
+      <span style="text-transform: uppercase">
+        This centers on the exploitation of national crises (disasters or
+        upheavals) to establish controversial and questionable policies, while
+        citizens are too distracted (emotionally and physically) to engage and
+        develop an adequate response and resist effectively.
+      </span>
+      <% } %> -->
+    </h1>
+    <div class="main_cont front">
+      <%- include(`../partials/header-front`) %> <%- include(`../pages/${page}`)
+      %>
     </div>
   </body>
 </html>

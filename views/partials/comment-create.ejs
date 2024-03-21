@@ -1,0 +1,22 @@
+<% if (isLoggedIn) { %>
+  <%   let profilePic; for( let i = 0; i < users.length; i++ ) { %>
+      <% if (users[i].user_id == currentUser_id) { 
+  profilePic = users[i].profile_pic
+}} %> 
+  <div class="post-text">
+  <img
+  class="small_profile_pic"
+  src="<%=profilePic.slice(6)%>"
+  alt="Post Image"
+/>
+  <form action="/comments/create" method="post">
+    <textarea name="comment" id="comment" rows="5" required></textarea>
+    <input type="hidden" name="post_id" value="<%= post.post_id %>">
+    <button type="submit">Send</button>
+  </form>
+</div>
+<% } %>
+
+
+
+

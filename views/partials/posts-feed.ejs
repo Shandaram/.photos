@@ -1,0 +1,176 @@
+<div class="cont-feed">
+  <% for( let index = 0; index < posts.length; index++ ) { %> <% let userName =
+  ""; let profilePic = ""; for( let i = 0; i < users.length; i++ ) { %> <% if
+  (users[i].user_id == posts[index].user_id) { userName = users[i].user_name;
+  profilePic = users[i].profile_pic} %> <% } %>
+  <div class="toggleModal">
+    <div class="feed-top">
+      <img
+        class="small_profile_pic"
+        src="<%= profilePic.slice(6) %>" alt=""
+      />
+      <span class="handle"><%= userName %></span>
+    </div>
+
+    <img
+      class="post_pic"
+      src="<%= posts[index].path.slice(6) %>"
+      alt="<%= posts[index].alt_text%>"
+    />
+    <div class="post-text first">
+      <div>
+        <p>
+          <span class="handle"><%= userName %></span> <%=
+          posts[index].description %>
+        </p>
+        <div class="likes-comments-box">
+          <% const postDate = posts[index].post_created; const options = { year:
+          "numeric", month: "long", day: "numeric", hour: "numeric", minute:
+          "numeric" }; let formattedDate = postDate.toLocaleString("en-US",
+          options); posts[index].post_created = formattedDate; %>
+
+          <p class="likes">
+            <i
+              class="fa-<%=posts[index].liked_by_current_user ? 'solid' : 'regular' %> fa-heart like-icon"
+              data-postid="<%= posts[index].post_id %>"
+            ></i>
+            <%= posts[index].likes %>
+          </p>
+
+          <p>
+            <i class="fa-regular fa-comment"></i><%= posts[index].comment_count
+            %>
+          </p>
+        </div>
+        <p class="small-text"><%= formattedDate%></p>
+      </div>
+    </div>
+  </div>
+  <%- include(`../partials/post-modal`, {index: index}) %> <% } %>
+</div>
+
+<script>
+    $(document).ready(function () {
+      $(".toggleModal").click(function () {
+        $(this).next(".myModal").addClass("flex");
+      });
+
+      $(".close").click(function () {
+        $(this).closest(".myModal").removeClass("flex");
+      });
+
+
+      $('.like-icon').on('click', function() {
+
+  const post_id = $(this).data('postid');
+  const user_id = <%=currentUser_id %>;
+  const likeCountElement = $(this).closest('.likes');
+
+  $.ajax({
+    url: '/posts/like',
+    method: 'POST',
+    data: { post_id: post_id, user_id: user_id },
+    success: function(response) {
+      if (response.success) {
+        console.log(response.like_count)
+        likeCountElement.text(response.like_count);
+      }
+    },
+    error: function(xhr, status, error) {
+        console.log('Error:');
+      }
+  });
+
+    });
+
+
+    });
+</script>
+
+<style>
+  .toggleModal img.post_pic {
+    cursor: pointer;
+    height: 70vh;
+    object-fit: cover;
+  }
+
+  .myModal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 3;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  .myModal .close {
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+    cursor: pointer;
+    color: var(--background);
+    font-size: 35px;
+  }
+  .flex {
+    display: flex;
+  }
+  .modal-content {
+    display: grid;
+    grid-template-columns: auto 32vw;
+    border-radius: 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--dark-background);
+  }
+  .modal-content .text-box {
+    padding: 1vw;
+    padding-right: 2vw;
+    background-color: var(--background);
+  }
+  .likes-comments-box {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    align-items: baseline;
+    grid-gap: 1vw;
+  }
+  .likes-comments-box p {
+    margin: 0;
+  }
+
+  .likes-comments-box i {
+    padding-right: 0.5vw;
+    cursor: pointer;
+  }
+
+  a {
+    text-align: center;
+  }
+
+  .fa-square-plus {
+    font-size: 80px;
+  }
+
+  .modal-content .post-text {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 0.5vw;
+    overflow-y: scroll;
+  }
+
+  .post-text.first {
+    border-bottom: 1px solid var(--dark-background);
+  }
+
+  .modal-content .post_img {
+    max-width: 800px;
+    max-height: 90vh;
+    object-fit: cover;
+    justify-self: center;
+    align-self: center;
+  }
+</style>

@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="/colors.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/579021082b.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <%- include(`../partials/header-profile`) %>
-
-    <div class="main_cont">
-      <%- include(`../pages/${page}`)  %>
+    <div class="main_cont loggedIn">
+      <%- include(`../partials/header-profile`) %>
+      <div class="profile">
+        <%- include(`../pages/${page}`)  %>
+      </div>
     </div>
   </body>
 </html>
+

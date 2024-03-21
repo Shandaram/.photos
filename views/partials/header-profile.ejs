@@ -1,5 +1,57 @@
-<header>
-    <div><a href="/users">Log out</a></div>
-    <h2>. /photos</h2>
-    <div class="butt">   </div>
-  </header>
+<header class="profileH">
+  <a href="/users"><h2 class="logo">./photos</h2></a>
+
+  <div class="search-container">
+    <i class="fa-solid fa-magnifying-glass"></i><input type="text" id="searchInput" placeholder="Search..." />
+  </div>
+
+  <div id="searchResults"></div>
+
+  <div>
+    <div><a href="/users/<%=currentUser_id%>">Profile</a></div>
+    <div><a href="/">Log out</a></div>
+  </div>
+
+</header>
+
+<script>
+    $(document).ready(function () {
+      $("#searchInput").on("input", function () {
+        searchUsers();
+      });
+    });
+
+    function searchUsers() {
+
+      var searchValue = $("#searchInput").val().toLowerCase();
+      if (searchValue === "") {
+    $("#searchResults").empty(); // Clear the search results if the search value is empty
+    return; // Exit the function if the search value is empty
+  }
+      var userObjects = [];
+    <% users.forEach(function(user) { %>
+    var userObject = {
+      user_id: <%= user.user_id %>, 
+      user_name: '<%= user.user_name %>' 
+    };
+    userObjects.push(userObject);
+    <% }); %>
+
+
+      var filteredUsers = userObjects.filter(function (user) {
+        return user.user_name.toLowerCase().includes(searchValue);
+      });
+      displaySearchResults(filteredUsers);
+    }
+
+    function displaySearchResults(results) {
+      var searchResultsContainer = $("#searchResults");
+      searchResultsContainer.empty();
+      results.forEach(function (user) {
+        var link = $("<a>")
+          .attr("href", "/users/" + user.user_id)
+          .text(user.user_name);
+        searchResultsContainer.append(link).append("<br>");
+      });
+    }
+</script>

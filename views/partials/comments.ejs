@@ -1,0 +1,22 @@
+<% const postDate = comment.comm_created; const options = {
+  year: "numeric", month: "long", day: "numeric", hour: "numeric",
+  minute: "numeric" }; let formattedDate =
+  postDate.toLocaleString("en-US", options); comment.comm_created
+  = formattedDate; %>
+<div class="post-text first">
+    <img style="opacity: 0;"
+    class="small_profile_pic"
+    src=""
+  />
+  <div>
+    <p><span class="userName"> <%= comment.user_name %> </span> <%= comment.comment %></p>
+    <% if (currentUser_id == comment.user_id) { %>
+    <form action="/comments/delete" method="post">
+      <input type="hidden" name="comm_id" value="<%= comment.comm_id %>">
+      <button type="submit">delete</button>
+    </form>
+<% } %>
+    <p class="small-text"><%= formattedDate%></p>
+  </div>
+  
+</div>

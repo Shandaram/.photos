@@ -1,0 +1,159 @@
+<div class="cont-posts">
+  <%if (user) {if (currentUser_id == user.user_id) {%>
+  <a href="/posts/create">
+    <i class="fa-regular fa-plus"></i>
+  </a>
+  <% }} %> <% for( let index = 0; index < posts.length; index++ ) { %>
+  <div class="toggleModal">
+    <img
+      src="<%= posts[index].path.slice(6) %>"
+      alt="<%= posts[index].alt_text%>"
+    />
+  </div>
+  <%- include(`../partials/post-modal`, {index: index}) %> <% } %>
+</div>
+
+<script>
+    $(document).ready(function () {
+      $(".toggleModal").click(function () {
+        $(this).next(".myModal").addClass("flex");
+      });
+
+      $(".close").click(function () {
+        $(this).closest(".myModal").removeClass("flex");
+      });
+
+  $('.like-icon').on('click', function() {
+
+    const post_id = $(this).data('postid');
+    const user_id = <%= currentUser_id ?? 'null' %>;
+
+    const likeCountElement = $(this).closest('.likes'); 
+      
+    $.ajax({
+      url: '/posts/like', 
+      method: 'POST',
+      data: { post_id: post_id, user_id: user_id },
+      success: function(response) {
+        if (response.success) {
+          console.log(response.like_count)
+          likeCountElement.text(response.like_count);
+        }
+      },
+      error: function(xhr, status, error) {
+          console.log('Error:');
+        }
+    });
+  });
+    });
+</script>
+
+<style>
+  .toggleModal img {
+    border-radius: 15px;
+    cursor: pointer;
+    height: 30vh;
+    object-fit: cover;
+  }
+
+  .front .toggleModal {
+    filter: grayscale(1);
+  }
+
+  .toggleModal:hover {
+    filter: grayscale(0);
+    transform: scale(0.95);
+    transition: all 100ms ease-in;
+  }
+
+  .myModal {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 3;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 5;
+    text-align: left;
+  }
+  .myModal .close {
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+    cursor: pointer;
+    color: var(--background);
+    font-size: 35px;
+  }
+  .flex {
+    display: flex;
+  }
+  .modal-content {
+    display: grid;
+    grid-template-columns: auto 32vw;
+    border-radius: 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--dark-background);
+  }
+  .modal-content .text-box {
+    padding: 1vw;
+    padding-right: 2vw;
+    background-color: var(--background);
+  }
+  .likes-comments-box {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    align-items: baseline;
+    grid-gap: 1vw;
+  }
+  .likes-comments-box p {
+    margin: 0;
+  }
+
+  .likes-comments-box i {
+    padding-right: 0.5vw;
+    cursor: pointer;
+  }
+
+  .cont-posts a {
+    text-align: center;
+    border: 2px var(--light-text-color) solid;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-text-color);
+    color: var(--background);
+  }
+
+  .fa-plus {
+    font-size: 60px;
+  }
+
+  .modal-content .post-text {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 0.5vw;
+    overflow-y: scroll;
+  }
+
+  .post-text.first {
+    border-bottom: 1px solid var(--dark-background);
+  }
+
+  .modal-content .post_img {
+    max-width: 800px;
+    max-height: 90vh;
+    object-fit: cover;
+    justify-self: center;
+    align-self: center;
+  }
+</style>

@@ -1,0 +1,24 @@
+<div class="small-cont">
+  <h1>Login</h1>
+  <h3>Make sure to adjust the href attribute.</h3>
+
+  <form action="/users/login" method="post">
+    <label for="email">Email</label>
+    <input id="email" type="text" name="email" required />
+    <label for="password">Password</label>
+    <input type="text" name="password" required />
+    <% if (message) { %>
+    <div class="error"><%= message %></div>
+    <% } %>
+<div>
+  <button class="cta-button">Log in</button>
+  <a href="/" class="sec-button">back</a>
+</div>
+  </form>
+ 
+  <p>
+    If you do not have an acccount, <a href="/register"> sign up</a> and join
+    the fun.
+  </p>
+</div>
+

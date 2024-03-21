@@ -1,62 +1,42 @@
+
 <div class="user cont">
   <img
     class="profile_pic"
-    src="data:image/png; base64, <%= user.profile_pic %>"
+    src="<%= user.profile_pic.slice(6) %>"
     alt=""
   />
-  <div>
+  <div class="user-info">
     <div class="horizontal-flex">
         <h1><%= user.user_name %></h1>
-        <a href="/users/<%= user.user_id %>/edit">Edit</a>
+        <% if (currentUser_id == user.user_id) {%>
+        <a class="button" href="/users/<%= user.user_id %>/edit">Edit</a>
+        <% } %>
     </div>
 
 
     <div class="horizontal-grid-3">
       <div>
         <p>Posts:</p>
-        <p>0</p>
+        <h3> <%= posts.length %></h3>
       </div>
       <div>
         <p>Followers:</p>
-        <p>0</p>
+        <h3> 0</h3>
       </div>
       <div>
         <p>Following:</p>
-        <p>0</p>
+        <h3> 0</h3>
       </div>
     </div>
-    <div class="horizontal-flex">
-      <div><%= user.user_fullName %> </div>
-      <div> <%= user.pronouns %> </div>
-    </div>
-
-    <div><%= user.user_age %> yo</div>
-
     <div>
-      <p>Bio</p>
-      <p><%= user.user_bio %></p>
+    <div class="horizontal-flex">
+      <p class="userName"><%= user.user_fullName %> </p>
+      <p ><%= user.pronouns %> </p>
+    </div>
+    <p><%= user.user_age %> yo</p>
+    <p class="bio"><%= user.user_bio %></p>
     </div>
   </div>
 </div>
 
-<div style="background-color: black; width: 100%; height: 1px;"></div>
-<%- include(`./post-create`)  %>
-<div class="cont-posts">
-  <% for( let index = 0; index < posts.length; index++ ) { %>
-    <% if (posts[index].user_id == user.user_id) { %>
-
-        <a href="/posts/<%= posts[index].post_id %>">
-          <img src="<%= posts[index].path.slice(6) %>" alt="Post Image">
-        </a>
-
-
-    <% } %>
-  <% } %>
-
-</div>
-
-
- 
-
-
-
+<%- include(`../partials/${partial}`) %>

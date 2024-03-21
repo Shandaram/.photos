@@ -3,20 +3,11 @@
  Enter your details.
 </p>
 
-<% const fields = [
-{ label: "Username", variable: "user_name" },
-{ label: "Email", variable: "email" }
-]  %>
-
-<% fields.forEach(field => { %>
-<label for="<%= field.variable %>"><%= field.label %>: </label>
-<span><%= user[field.variable] %></span>
-<br>
-<% })  %>
-
-
-
 <form action="/users/<%=user.user_id %>/edit"  method="post" enctype="multipart/form-data">
+<label for="user_name">Username</label>
+<input type="text" name="user_name" id="user_name" value="<%= user.user_name || '' %>" />
+<label for="email">Email</label>
+<input type="text" name="email" id="email" value="<%= user.email || '' %>" />
 <label for="user_fullName">Name</label>
 <input type="text" name="user_fullName" id="user_fullName" value="<%= user.user_fullName || '' %>" />
 <label for="user_age">Age</label>
@@ -24,11 +15,16 @@
 <label for="pronouns">Pronouns</label>
 <input type="text" name="pronouns"  id="pronouns" value="<%= user.pronouns || '' %>" />
 <label for="user_bio">Bio</label>
-<input type="text" name="user_bio" id="user_bio" value="<%= user.user_bio || '' %>" />
+<textarea name="user_bio" id="user_bio" rows="4" cols="50">
+  <%= user.user_bio || '' %>
+</textarea>
 <label for="profile_pic">Profile Picture</label>
 <input type="file" name="profile_pic" id="profile_pic" accept="image/jpeg, image/png" />
-<button>Save</button>
+<div>
+    <button class="cta-button">Save</button>
+    <form action= "/users/<%= user.user_id %>" method="get">
+        <input class="sec-button" type="submit" value="Disgard" />
+        </form>
+</div>
+
 </form>    
-<form action= "/users/<%= user.user_id %>" method="get">
-<input type="submit" value="to user" />
-</form>

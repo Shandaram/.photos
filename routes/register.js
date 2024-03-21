@@ -1,42 +1,32 @@
-import express from "express" 
-import { getUsers, createUser } from "../config/user.js" 
-import multer from "multer" 
-import { genPassword } from "../utils/passwordUtils.js"
+import express from "express";
+import multer from "multer";
+import dotenv from "dotenv";
+import { createUserProfile } from "../controllers/userControl.js";
+dotenv.config();
 
-const register = express.Router() 
-const upload = multer({storage:multer.memoryStorage()})
-register.use(express.json()) 
-register.use(express.urlencoded({ extended: true })) 
+const register = express.Router();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/uploads/profile_pics");
+  },
+  filename: function (req, file, cb) {
+    const fileExtension = file.originalname.split('.').pop();
+    const randomNumber = Math.floor(Math.random() * 9000) + 1000;
+    const newFilename = `${file.originalname.split('.')[0]}_${randomNumber}.${fileExtension}`;
+    cb(null, newFilename);
+  },
+});
+const upload = multer({ storage: storage });
 
-let page = "login"   
+register.use(express.json());
+register.use(express.urlencoded({ extended: true }));
 
-register.get("/register", async (req, res) => {
-  const allUsers = await getUsers() 
-  page = "register" 
-    res.render("./layouts/index.ejs", {
-      numberOfIteractions: allUsers.length,
-      allUsers: allUsers,
-      page: page
-    }) 
-})
+register.get("/register/new", async (req, res) => {
+  res.render("./layouts/index.ejs", {
+    page: "register",
+  });
+});
 
-register.post("/register", upload.single('profile_pic'), async (req, res) => {
+register.post("/register", upload.single("profile_pic"), createUserProfile);
 
-    const user_name = req.body.user_name
-    const email = req.body.email
-    const password  = req.body.password
-    const hash = await genPassword(password)
-    const profile_pic = null
-    if(req.file){
-       profile_pic = req.file.buffer.toString('base64')
-    } 
-    const newUser = await createUser({
-      user_name,
-      email,
-      password: hash,
-      profile_pic}
-    )
-    res.redirect(`/users/${newUser.user_id}/edit`) 
-  }) 
-
-export default register 
+export default register;

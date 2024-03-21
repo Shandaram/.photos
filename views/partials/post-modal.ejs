@@ -1,36 +1,91 @@
-<div id="modal-body">
+<div class="myModal">
   <div class="modal-content">
-    <img src="<%= post.path.slice(6) %>" alt="Post Image">
-    <div>
-      <p><%= post.description %></p>
-      <p>likes: <%= post.likes %></p>
-     <a href="/users/<%= post.user_id %>"><butto>close</button></a> 
+    <% let userName = "";
+    let profilePic = "";
+    for( let i = 0; i < users.length; i++ ) { %> 
+      <% if (users[i].user_id == posts[index].user_id) { userName =
+    users[i].user_name; profilePic = users[i].profile_pic} %> <% } %>
+    <img
+      class="post_img"
+      src="<%= posts[index].path.slice(6) %>"
+      alt="<%= posts[index].alt_text%>"
+    />
+    <div class="text-box">
+      <% if (currentUser_id == posts[index].user_id) { %>
+      <div>
+        <i class="fa-solid fa-ellipsis"></i>
+
+        <form action="/posts/delete" method="post">
+          <input
+            type="hidden"
+            name="post_id"
+            value="<%= posts[index].post_id %>"
+          />
+          <button type="submit">Delete</button>
+        </form>
+        <form action="/posts/edit" method="post">
+          <input
+            type="hidden"
+            name="post_id"
+            value="<%= posts[index].post_id %>"
+          />
+          <button type="submit">Edit</button>
+        </form>
+      </div>
+      <% } %>
+      <div class="post-text first">
+        <img
+          class="small_profile_pic"
+          src="<%= profilePic.slice(6) %>"
+          alt="Post Image"
+        />
+        <div>
+          <p>
+            <span class="handle"><%= userName %></span> <%=
+            posts[index].description %>
+          </p>
+          <div class="likes-comments-box">
+            <% const postDate = posts[index].post_created; const options = {
+            year: "numeric", month: "long", day: "numeric", hour: "numeric",
+            minute: "numeric" }; let formattedDate =
+            postDate.toLocaleString("en-US", options); posts[index].post_created
+            = formattedDate; %> 
+            
+            <% if (currentUser_id !== null) { %>
+            <p class="likes">
+              <i
+                class="fa-<%=posts[index].liked_by_current_user ? 'solid' : 'regular' %> fa-heart like-icon"
+                data-postid="<%= posts[index].post_id %>"
+              ></i>
+              <%= posts[index].likes %>
+            </p>
+            <% } else { %>
+            <p>
+              <i class="fa-regular fa-heart"></i>
+              <%= posts[index].likes %>
+            </p>
+
+            <% } %>
+            <p>
+              <i class="fa-regular fa-comment"></i><%=
+              posts[index].comment_count %>
+            </p>
+          </div>
+          <p class="small-text"><%= formattedDate%></p>
+        </div>
+      </div>
+
+      <div class="post-text">
+        <div>
+          <%- include(`../partials/comment-create`, {post: posts[index]}) %> <%
+          for (let i = 0; i < comments.length; i++) { %>
+          <%if(comments[i].post_id == posts[index].post_id){ %>
+          <%-include(`../partials/comments`, {comment: comments[i]}) %> <%} } %>
+        </div>
+      </div>
     </div>
   </div>
+  <i class="fa-solid fa-xmark close"></i>
 </div>
 
-<style>
-  #modal-body {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  .modal-content {
-    width: 70%;
-    height: 90%;
-    display: grid;
-    grid-template-columns: 3fr 1.5fr;
-    background-color: white;
-  }
 
-  .modal-content img {
-    width: 100%;
-    
-  }
-</style>
