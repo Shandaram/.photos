@@ -1,22 +1,29 @@
-<% const postDate = comment.comm_created; const options = {
-  year: "numeric", month: "long", day: "numeric", hour: "numeric",
-  minute: "numeric" }; let formattedDate =
-  postDate.toLocaleString("en-US", options); comment.comm_created
-  = formattedDate; %>
-<div class="post-text first">
-    <img style="opacity: 0;"
-    class="small_profile_pic"
-    src=""
-  />
-  <div>
-    <p><span class="userName"> <%= comment.user_name %> </span> <%= comment.comment %></p>
-    <% if (currentUser_id == comment.user_id) { %>
-    <form action="/comments/delete" method="post">
-      <input type="hidden" name="comm_id" value="<%= comment.comm_id %>">
-      <button type="submit">delete</button>
-    </form>
-<% } %>
-    <p class="small-text"><%= formattedDate%></p>
+<% const postDate=comment.comm_created; const options={ year: "numeric" , month: "long" , day: "numeric" ,
+  hour: "numeric" , minute: "numeric" }; let formattedDate=postDate.toLocaleString("en-US", options);
+  comment.comm_created=formattedDate; %>
+  <img style="opacity: 0" class="small_profile_pic" src="" />
+  <div class="comm-cont" id="comment-<%=comment.comm_id%>">
+    <div class="horizontal-flex">
+      <p>
+        <% if (currentUser_id !==null) { %>
+          <a href="/users/<%=comment.user_id%>">
+            <span class="userName">
+              <%= comment.user_name %>
+            </span> </a>
+          <%=comment.comment %>
+            <% } else { %>
+              <span class="userName">
+                <%= comment.user_name %>
+              </span>
+              <%=comment.comment %>
+                <% } %>
+      </p>
+      <% if (currentUser_id==comment.user_id) { %>
+        <i class="fa-regular fa-square-minus delete-comment-btn" data-commid="<%=comment.comm_id%>"
+          id="delete-<%=comment.comm_id%>"></i>
+        <% } %>
+    </div>
+    <p class="small-text">
+      <%= formattedDate%>
+    </p>
   </div>
-  
-</div>

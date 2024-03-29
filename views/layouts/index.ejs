@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/colors.css" />
+    <link rel="stylesheet" type="text/css" href="/features.css" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/userlogic.js"></script>
+    <script type="text/javascript" src="/js/ajax-functions.js"></script>
     <script
       src="https://kit.fontawesome.com/579021082b.js"
       crossorigin="anonymous"
@@ -15,19 +20,9 @@
   </head>
 
   <body class="front-b">
-    <!-- <h1 class="back">
-      <% for( let index = 0; index < 2; index++ ) { %>
-      <span style="text-transform: uppercase">
-        This centers on the exploitation of national crises (disasters or
-        upheavals) to establish controversial and questionable policies, while
-        citizens are too distracted (emotionally and physically) to engage and
-        develop an adequate response and resist effectively.
-      </span>
-      <% } %> -->
     </h1>
     <div class="main_cont front">
-      <%- include(`../partials/header-front`) %> <%- include(`../pages/${page}`)
-      %>
+      <%- include(`../partials/header-front`) %> <%- include(`../pages/${page}`)%>
     </div>
   </body>
 </html>

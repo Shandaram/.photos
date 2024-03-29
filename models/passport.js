@@ -1,7 +1,7 @@
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import { validPassword } from "../controllers/passwordUtils.js";
-import { User } from "./user.js";
+import { User } from "./users.js";
 
 const customFields = {
   usernameField: "email",
@@ -10,19 +10,19 @@ const customFields = {
 
 const verifyCallback = async (username, password, done) => {
   try {
-    const user = await User.findOne(username);
+    const user = await User.getBy(username, "email");
     if (!user) {
       return done(null, false, { message: "No user with this email" });
     }
-      const isValid = await validPassword(password, user.password);
-      if (isValid) {
-        return done(null, user);
-      } else {
-        return done(null, false, { message: "Wrong password" });
-      }
-    } catch (err) {
-      done(err);
+    const isValid = await validPassword(password, user.password);
+    if (isValid) {
+      return done(null, user);
+    } else {
+      return done(null, false, { message: "Wrong password" });
     }
+  } catch (err) {
+    done(err);
+  }
 };
 
 export const strategy = new LocalStrategy(customFields, verifyCallback);

@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/colors.css" />
+    <link rel="stylesheet" type="text/css" href="/features.css" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://kit.fontawesome.com/579021082b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/userlogic.js"></script>
+    <script type="text/javascript" src="/js/ajax-functions.js"></script>
+    <script
+      src="https://kit.fontawesome.com/579021082b.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
     <div class="main_cont loggedIn">
       <%- include(`../partials/header-profile`) %>
-      <div class="profile">
-        <%- include(`../pages/${page}`)  %>
-      </div>
+      <div class="profile"><%- include(`../pages/${page}`) %></div>
+      <script> var currId ="<%=currentUser_id%>"</script>
     </div>
+    <div id="userObjects" data-users="<%= JSON.stringify(users) %>"></div>
   </body>
+ 
 </html>
-

@@ -1,0 +1,40 @@
+/* fonts */
+
+@font-face {
+  font-family: "TASA-Display-black";
+  src: url("./assets/fonts/TASAOrbiterDisplay-Black.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "TASA-Display-medium";
+  src: url("./assets/fonts/TASAOrbiterDisplay-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "TASA-Display-regular";
+  src: url("./assets/fonts/TASAOrbiterDisplay-Regular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "TASA-Text-bold";
+  src: url("./assets/fonts/TASAOrbiterText-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "TASA-Text-regular";
+  src: url("./assets/fonts/TASAOrbiterText-Regular.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Logo-font";
+  src: url("./assets/fonts/Daggingregular-d9p4X.otf") format("truetype");
+}
+
+:root {
+  --Display-black: "TASA-Display-black";
+  --Display-med: "TASA-Display-medium";
+  --Display-reg: "TASA-Display-regular";
+  --Text-bold: "TASA-Text-bold";
+  --Text-reg: "TASA-Text-regular";
+  --Logo: "Logo-font";
+}

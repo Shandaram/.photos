@@ -1,34 +1,67 @@
 <div class="small-cont">
   <h1>Register</h1>
-  <h3>Make sure to adjust the href attribute to match the path to your CSS</h3>
-
   <form action="/register" method="post" enctype="multipart/form-data">
-    <label for="user_name">Username*</label>
-    <input type="text" name="user_name" id="user_name" />
-    <label for="email">Email*</label>
-    <input type="text" name="email" id="email" />
-    <label for="password">Password*</label>
-    <input type="text" name="password" id="password" />
-    <label for="profile_pic">Profile Picture</label>
-    <input
-      type="file"
-      name="profile_pic"
-      id="profile_pic"
-      accept="image/jpeg, image/png"
-    />
-    <div>
+    <div class="editGrid">
+      <div class="col-1">
+        <div class="field">
+          <label for="user_name">Username*</label>
+          <input
+            class="check"
+            data-field="username"
+            type="text"
+            name="user_name"
+            id="user_name"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="email">Email*</label>
+          <input
+            class="check"
+            data-field="email"
+            type="email"
+            name="email"
+            id="email"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="password">Password*</label>
+          <input
+            class="check"
+            data-field="password"
+            type="text"
+            name="password"
+            id="password"
+            required
+          />
+        </div>
+        <div class="field">
+          <input
+            type="file"
+            name="profile_pic"
+            id="profile_pic"
+            accept="image/jpeg, image/png"
+          />
+          <label for="profile_pic">
+            <p>Profile Picture</p>
+            <p class="upload">
+              <i class="fa-solid fa-file-arrow-up"></i>
+              <span id="fileName"></span>
+            </p>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-b">
+      <div class="error-empty"></div>
+      <% if (message) { %>
+      <div class="error"><%= message %></div>
+      <% } %>
       <button type="submit" class="cta-button">Register</button>
-      <a href="/" class="sec-button ">back</a>
+      <a href="/" class="sec-button">back</a>
     </div>
   </form>
-
 </div>
-<style>
-  h1.back {
-    color: var(--body-background);
-  }
-  
-  body {
-    background-color: var(--dark-text);
-  }
-  </style>
+

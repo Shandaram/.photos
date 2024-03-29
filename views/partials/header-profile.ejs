@@ -1,57 +1,38 @@
-<header class="profileH">
-  <a href="/users"><h2 class="logo">./photos</h2></a>
-
+<header class="profileH desktop">
+  <a href="/users">
+    <p class="logo">./photos</p>
+  </a>
   <div class="search-container">
-    <i class="fa-solid fa-magnifying-glass"></i><input type="text" id="searchInput" placeholder="Search..." />
+    <input type="text" id="searchInput" placeholder="Search..." />
+    <i class="fa-solid fa-magnifying-glass"></i>
   </div>
-
   <div id="searchResults"></div>
-
-  <div>
-    <div><a href="/users/<%=currentUser_id%>">Profile</a></div>
-    <div><a href="/">Log out</a></div>
+  <div class="utils">
+    <div class="toggleButton">
+      <div class="circle light"></div>
+      <div class="circle dark"></div>
+    </div>
+    <a href="/users/<%=currentUser_id%>">Profile</a>
+    <a href="/logoutUser">Log out</a>
+    <a class="del-acc" href="/users/<%=currentUser_id%>/delete">Delete account</a>
   </div>
-
 </header>
-
-<script>
-    $(document).ready(function () {
-      $("#searchInput").on("input", function () {
-        searchUsers();
-      });
-    });
-
-    function searchUsers() {
-
-      var searchValue = $("#searchInput").val().toLowerCase();
-      if (searchValue === "") {
-    $("#searchResults").empty(); // Clear the search results if the search value is empty
-    return; // Exit the function if the search value is empty
-  }
-      var userObjects = [];
-    <% users.forEach(function(user) { %>
-    var userObject = {
-      user_id: <%= user.user_id %>, 
-      user_name: '<%= user.user_name %>' 
-    };
-    userObjects.push(userObject);
-    <% }); %>
-
-
-      var filteredUsers = userObjects.filter(function (user) {
-        return user.user_name.toLowerCase().includes(searchValue);
-      });
-      displaySearchResults(filteredUsers);
-    }
-
-    function displaySearchResults(results) {
-      var searchResultsContainer = $("#searchResults");
-      searchResultsContainer.empty();
-      results.forEach(function (user) {
-        var link = $("<a>")
-          .attr("href", "/users/" + user.user_id)
-          .text(user.user_name);
-        searchResultsContainer.append(link).append("<br>");
-      });
-    }
-</script>
+<header class="mobile">
+  <div></div>
+  <a href="/">
+    <p class="logo">./photos</p>
+  </a>
+  <i class="fa-solid fa-ellipsis menu-trigger"></i>
+  <div class="dropdown-cont">
+    <i class="fa-solid fa-xmark close-menu"></i>
+    <div class="utils">
+      <div class="toggleButton">
+        <div class="circle light"></div>
+        <div class="circle dark"></div>
+      </div>
+      <a href="/users/<%=currentUser_id%>">Profile</a>
+      <a href="/logoutUser">Log out</a>
+      <a class="del-acc" href="/users/<%=currentUser_id%>/delete">Delete account</a>
+    </div>
+  </div>
+</header>

@@ -1,22 +1,25 @@
-<% if (isLoggedIn) { %>
-  <%   let profilePic; for( let i = 0; i < users.length; i++ ) { %>
-      <% if (users[i].user_id == currentUser_id) { 
-  profilePic = users[i].profile_pic
-}} %> 
-  <div class="post-text">
-  <img
-  class="small_profile_pic"
-  src="<%=profilePic.slice(6)%>"
-  alt="Post Image"
-/>
-  <form action="/comments/create" method="post">
-    <textarea name="comment" id="comment" rows="5" required></textarea>
-    <input type="hidden" name="post_id" value="<%= post.post_id %>">
-    <button type="submit">Send</button>
+<% if (isLoggedIn) { %> <% let profilePic; for( let i = 0; i < users.length; i++
+) { %> <% if (users[i].user_id == currentUser_id) { profilePic =
+users[i].profile_pic }} %>
+<div class="post-text">
+  <a href="/users/<%=currentUser_id%>">
+    <img
+      class="small_profile_pic"
+      src="<%=profilePic.slice(6)%>"
+      alt="Post Image"
+    />
+  </a>
+  <form>
+    <textarea name="comment" id="comment-<%=post.post_id%>" required></textarea>
+    <input type="hidden" name="post_id" value="<%=post.post_id%>" />
+    <button
+      type="submit"
+      data-postid="<%=post.post_id%>"
+      class="small sec-button comment-send"
+      id="comment-send-<%=post.post_id%>"
+    >
+      Send
+    </button>
   </form>
 </div>
 <% } %>
-
-
-
-

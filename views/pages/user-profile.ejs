@@ -1,42 +1,69 @@
-
-<div class="user cont">
-  <img
-    class="profile_pic"
-    src="<%= user.profile_pic.slice(6) %>"
-    alt=""
-  />
-  <div class="user-info">
-    <div class="horizontal-flex">
+<div class="user_main_cont">
+  <div class="user cont">
+    <img class="profile_pic" src="<%= user.profile_pic.slice(6) %>" alt="" />
+    <div class="user-info">
+      <div class="horizontal-flex">
         <h1><%= user.user_name %></h1>
         <% if (currentUser_id == user.user_id) {%>
-        <a class="button" href="/users/<%= user.user_id %>/edit">Edit</a>
+        <a class="sec-button small" href="/users/<%= user.user_id %>/edit"
+          >Edit</a
+        >
+        <% } %> <% if (currentUser_id != user.user_id) {%>
+        <button
+          class="follow-button sec-button small"
+          data-userid="<%= user.user_id %>"
+        >
+          <% if (userHasFollowed) { %> Unfollow <% } else { %> Follow <% } %>
+        </button>
         <% } %>
+      </div>
+
+      <div class="horizontal-grid-3">
+        <div>
+          <p>Posts:</p>
+          <h3><%= posts.length %></h3>
+        </div>
+        <div>
+          <p>Followers:</p>
+          <h3 class="followers"><%= followers_count %></h3>
+        </div>
+        <div>
+          <p>Following:</p>
+          <h3 class="following"><%= following_count %></h3>
+        </div>
+      </div>
+
+      <div class="user-info-small desktop">
+        <div class="horizontal-flex mob-V">
+          <% if (user.user_fullName) { %>
+          <p class="userName"><%= user.user_fullName %></p>
+          <% } %> <% if (user.pronouns) { %>
+          <p class="pronouns"><%= user.pronouns %></p>
+          <% } %>
+        </div>
+        <% if (user.user_age) { %>
+        <p><%= user.user_age %> yo</p>
+        <% } %>
+        <p class="bio"><%= user.user_bio %></p>
+      </div>
     </div>
-
-
-    <div class="horizontal-grid-3">
-      <div>
-        <p>Posts:</p>
-        <h3> <%= posts.length %></h3>
-      </div>
-      <div>
-        <p>Followers:</p>
-        <h3> 0</h3>
-      </div>
-      <div>
-        <p>Following:</p>
-        <h3> 0</h3>
-      </div>
+  </div>
+  <div class="user-info mobile">
+    <div class="horizontal-flex mob-V">
+      <% if (user.user_fullName) { %>
+      <p class="userName"><%= user.user_fullName %></p>
+      <% } %> <% if (user.pronouns) { %>
+      <p class="pronouns"><%= user.pronouns %></p>
+      <% } %>
     </div>
     <div>
-    <div class="horizontal-flex">
-      <p class="userName"><%= user.user_fullName %> </p>
-      <p ><%= user.pronouns %> </p>
-    </div>
-    <p><%= user.user_age %> yo</p>
-    <p class="bio"><%= user.user_bio %></p>
+      <% if (user.user_age) { %>
+      <p><%= user.user_age %> yo</p>
+      <% } %>
+      <p class="bio"><%= user.user_bio %></p>
     </div>
   </div>
 </div>
 
 <%- include(`../partials/${partial}`) %>
+

@@ -1,15 +1,17 @@
-import express from "express" 
+import express from "express";
 import passport from "passport";
-import { createCommentInstance, deleteCommentController} from '../controllers/commentControl.js'
+import { CommentControl } from "../controllers/commentControl.js";
 
-const comments = express.Router() 
+const comments = express.Router();
 
-comments.use(express.json()) 
-comments.use(express.urlencoded({ extended: true })) 
-comments.use(passport.initialize())
-comments.use(passport.session())
+comments.use(express.json());
+comments.use(express.urlencoded({ extended: true }));
+comments.use(passport.initialize());
+comments.use(passport.session());
 
-comments.post("/comments/create", createCommentInstance);
-comments.post("/comments/delete", deleteCommentController);
+//CREATE COMMENT
+comments.post("/comments/create", CommentControl.createCommentInstance);
+//DELETE COMMENT
+comments.post("/comments/delete", CommentControl.deleteCommentController);
 
-export default comments 
+export default comments;
