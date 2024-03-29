@@ -266,7 +266,6 @@ export const UserControl = {
 
   getUserFeed: async (req, res) => {
     try {
-      console.log(req.session.isLoggedIn);
       const currentUser_id = req.session.passport.user;
       const users = await User.getUsers();
       const comments = await Comment.getComments();

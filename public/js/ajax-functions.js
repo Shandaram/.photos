@@ -123,7 +123,7 @@ $(document).ready(function () {
 
                         if (response.currentUser_id == commentsN[j].user_id) {
                             commentHtml += `<i class="fa-regular fa-square-minus delete-comment-btn" data-commid="${commentsN[j].comm_id}"></i></div>`;
-                            console.log(commentsN[j].comm_id);
+        
                         } else {
                             commentHtml += `</div>`;
                         }
@@ -162,7 +162,6 @@ $(document).ready(function () {
         var filteredUsers = userObjects.filter(function (user) {
             return user.user_name.toLowerCase().includes(searchValue);
         });
-        console.log(filteredUsers);
         displaySearchResults(filteredUsers);
     }
 
