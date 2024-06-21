@@ -1,2 +1,2 @@
-# photos_app
-TCD PROGRAMMING FOR DIGITAL MEDIA
+# ./photos
+As part of my MSc, I developed a full-stack social media application using Node.js, Express.js, and EJS, featuring user authentication, profile management, and dynamic content interaction with posts, likes, followers, and comments. The app supports light/dark modes, secure image uploads, and accessibility through mandatory alt text. The project uses an MVC design pattern for maintainability and uses a normalised, secure MySQL database.
