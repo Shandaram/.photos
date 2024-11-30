@@ -50,7 +50,6 @@ As part of my MSc, I developed a full-stack social media application using Node.
 Ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (v14+)
 - [MySQL](https://www.mysql.com/)
-- [Git](https://git-scm.com/)
 
 ### Steps
 
